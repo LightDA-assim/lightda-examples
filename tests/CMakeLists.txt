@@ -11,6 +11,9 @@ if(FPRETTIFY_EXECUTABLE)
     -P ${CMAKE_CURRENT_SOURCE_DIR}/test_and_check_regex.cmake)
 endif()
 
+add_library(model_interface_tests model_interface_tests.f90)
+target_link_libraries(model_interface_tests PRIVATE lightda)
+
 add_executable(advect1d_model_interface_tests advect1d_model_interface_tests.F90)
 target_link_libraries(advect1d_model_interface_tests PRIVATE model_interface_tests system_mpi advect1d_assimilate_interfaces)
 configure_mpi_target(advect1d_model_interface_tests)
