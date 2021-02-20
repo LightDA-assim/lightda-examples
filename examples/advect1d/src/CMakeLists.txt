@@ -10,8 +10,8 @@ add_library(advect1d SHARED ${ADVECT1D_SOURCES})
 set(ADVECT1D_ASSIMILATE_SOURCES advect1d_assimilate.f90)
 add_executable(advect1d_assimilate ${ADVECT1D_ASSIMILATE_SOURCES})
 target_link_libraries(advect1d_assimilate PRIVATE
-  lightda lightda-lenkf-rsm system_mpi advect1d_assimilate_interfaces)
-configure_mpi_target(advect1d_assimilate)
+  lightda lightda-lenkf-rsm system_mpi advect1d_assimilate_interfaces
+  MPI::MPI_Fortran)
 set_source_files_properties(advect1d_assimilate_interfaces.F90
   PROPERTIES COMPILE_FLAGS -cpp)
 
