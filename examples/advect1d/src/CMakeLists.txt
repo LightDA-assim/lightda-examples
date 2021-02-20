@@ -7,7 +7,16 @@ target_include_directories(advect1d_assimilate_interfaces PUBLIC ${CMAKE_CURRENT
 set(ADVECT1D_SOURCES advect1d.f90)
 add_library(advect1d SHARED ${ADVECT1D_SOURCES})
 
-set(ALL_SOURCES ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES};${ADVECT1D_SOURCES})
+set(ADVECT1D_ASSIMILATE_SOURCES advect1d_assimilate.f90)
+add_executable(advect1d_assimilate ${ADVECT1D_ASSIMILATE_SOURCES})
+target_link_libraries(advect1d_assimilate PRIVATE
+  lightda lightda-lenkf-rsm system_mpi advect1d_assimilate_interfaces)
+configure_mpi_target(advect1d_assimilate)
+set_source_files_properties(advect1d_assimilate_interfaces.F90
+  PROPERTIES COMPILE_FLAGS -cpp)
+
+set(ALL_SOURCES ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES};${ADVECT1D_SOURCES};
+  ${ADVECT1D_ASSIMILATE_SOURCES})
 
 # Prepend path to sources and propagate to parent scope
 list(TRANSFORM ALL_SOURCES PREPEND "examples/advect1d/src/")
