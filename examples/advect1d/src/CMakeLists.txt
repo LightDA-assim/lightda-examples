@@ -10,5 +10,5 @@ add_library(advect1d SHARED ${ADVECT1D_SOURCES})
 set(ALL_SOURCES ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES};${ADVECT1D_SOURCES})
 
 # Prepend path to sources and propagate to parent scope
-list(TRANSFORM ALL_SOURCES PREPEND "src/")
+list(TRANSFORM ALL_SOURCES PREPEND "examples/advect1d/src/")
 set(ALL_SOURCES ${ALL_SOURCES} PARENT_SCOPE)
