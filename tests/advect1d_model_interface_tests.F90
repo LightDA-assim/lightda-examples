@@ -178,8 +178,7 @@ program test_advect1d_model_interface
 
   ensemble = generate_ensemble(istep, state_size, n_ensemble)
 
-  call MPI_Bcast(ensemble, state_size*n_ensemble, MPI_DOUBLE_PRECISION, &
-                 0, mpi_comm_world, ierr)
+  call MPI_Bcast(ensemble, state_size*n_ensemble, MPI_DOUBLE_PRECISION, 0, mpi_comm_world, ierr)
 
   if (rank == 0) call write_ensemble(istep, ensemble)
 
