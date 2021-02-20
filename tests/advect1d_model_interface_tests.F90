@@ -161,8 +161,7 @@ program test_advect1d_model_interface
   use model_interface_tests, ONLY: run_all
   use advect1d_assimilate_interfaces, ONLY: advect1d_interface, &
                                             new_advect1d_interface
-  use advect1d_model_interface_tests, ONLY: &
-    write_ensemble, generate_ensemble, run_all_advect1d
+  use advect1d_model_interface_tests, ONLY: write_ensemble, generate_ensemble, run_all_advect1d
   use system_mpi
   implicit none
   type(advect1d_interface)::model_interface
