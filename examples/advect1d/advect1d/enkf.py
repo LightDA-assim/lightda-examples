@@ -11,7 +11,7 @@ void enkf_analysis_from_innovations_wrapper(double*,double*,double*,double*,doub
 """)
 import numpy as np
 
-import libsuffix
+from . import libsuffix
 lib=ffi.dlopen('./libassim'+libsuffix.suffix)
 
 ctype2dtype = {}

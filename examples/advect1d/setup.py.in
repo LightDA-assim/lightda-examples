@@ -1,0 +1,17 @@
+from distutils.core import setup
+
+requires=[
+    'scipy',
+    'cffi',
+    'matplotlib',
+    'tables'
+]
+
+setup(
+    name='advect1d',
+    package_dir={ '': '${CMAKE_CURRENT_BINARY_DIR}' },
+    packages=['advect1d'],
+    package_data={
+        'advect1d':['advect1d/advect1d_assimilate']
+    }
+)

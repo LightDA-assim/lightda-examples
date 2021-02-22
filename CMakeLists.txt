@@ -25,7 +25,7 @@ find_package(lightda REQUIRED)
 find_package(lightda-lenkf-rsm REQUIRED)
 find_package(hdf5_exceptions REQUIRED)
 
-add_subdirectory(examples/advect1d/src)
+add_subdirectory(examples/advect1d)
 
 # -------------------
 # Build documentation

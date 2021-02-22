@@ -1,10 +1,10 @@
 from matplotlib import pyplot as plt
 import matplotlib.animation
 import numpy as np
-from advect1d import advance
+from .advect1d import advance
 from scipy.signal import sawtooth, square, hann
 from scipy.ndimage.filters import convolve1d
-from enkf import lenkf_rsm
+import advect1d
 
 def build_ensemble(n,n_ensemble,nghost=1):
     """
@@ -443,7 +443,9 @@ class ensemble_animator(object):
 
             print(os.getcwd())
 
-            cmd=['mpirun','-n','4','./advect1d_assimilate',
+            package_path=advect1d.__path__[0]
+
+            cmd=['mpirun','-n','4',os.path.join(package_path,'advect1d_assimilate'),
                                 '--istep',str(i),
                                 '--state_size',str(self.ensemble.shape[0]),
                                 '--batch_size',str(int(

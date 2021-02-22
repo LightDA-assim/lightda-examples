@@ -6,6 +6,10 @@ target_include_directories(advect1d_assimilate_interfaces PUBLIC ${CMAKE_CURRENT
 
 set(ADVECT1D_SOURCES advect1d.f90)
 add_library(advect1d SHARED ${ADVECT1D_SOURCES})
+set_target_properties(
+  advect1d
+  PROPERTIES
+  LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../advect1d)
 
 set(ADVECT1D_ASSIMILATE_SOURCES advect1d_assimilate.f90)
 add_executable(advect1d_assimilate ${ADVECT1D_ASSIMILATE_SOURCES})
@@ -14,6 +18,10 @@ target_link_libraries(advect1d_assimilate PRIVATE
   MPI::MPI_Fortran)
 set_source_files_properties(advect1d_assimilate_interfaces.F90
   PROPERTIES COMPILE_FLAGS -cpp)
+set_target_properties(
+  advect1d_assimilate
+  PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../advect1d)
 
 set(ALL_SOURCES ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES};${ADVECT1D_SOURCES};
   ${ADVECT1D_ASSIMILATE_SOURCES})

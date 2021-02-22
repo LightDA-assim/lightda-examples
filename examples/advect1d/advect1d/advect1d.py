@@ -4,8 +4,15 @@ ffi.cdef("""
 void advect1d_step(double*,double*,double,double,int32_t,int32_t);
 """)
 
-import libsuffix
-lib=ffi.dlopen('./libadvect1d'+libsuffix.suffix)
+from . import libsuffix
+
+import advect1d
+
+import os
+
+package_path=advect1d.__path__[0]
+
+lib=ffi.dlopen(os.path.join(package_path,'libadvect1d'+libsuffix.suffix))
 
 def advance(u,a,dx,dt,limiter):
     import numpy as np
