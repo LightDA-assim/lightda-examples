@@ -1,3 +1,13 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(lightda-examples-advect1d)
+
+enable_language(Fortran)
+
+find_package(lightda REQUIRED)
+find_package(lightda-lenkf-rsm REQUIRED)
+find_package(hdf5_exceptions REQUIRED)
+
 add_subdirectory(src)
 
 find_package(PythonInterp 3.5)
