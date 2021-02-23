@@ -33,7 +33,9 @@ if(PythonInterp_FOUND)
 
   add_custom_target(advect1d_python ALL DEPENDS ${PYTHON_BUILD_TIMESTAMP})
 
-  install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/setup.py install --root ${CMAKE_INSTALL_PREFIX})")
+  install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --root ${CMAKE_INSTALL_PREFIX} ${CMAKE_CURRENT_BINARY_DIR})")
+
+  install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${CMAKE_CURRENT_BINARY_DIR})")
 
 else()
   message("No Python interpreter found. Not building python wrappers")
