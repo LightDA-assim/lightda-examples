@@ -18,4 +18,4 @@ This project contains test cases and usage examples for LightDA. It contains the
 
 ## Advect1d
 
-Advect1d is a 1-d advection solver. It translates an arbitrary function through a periodic 1-D domain. The example code contains an observation defintion for point observations of the advected quantity, and a forward operator that predicts those point observations from the model state.
+Advect1d is a 1-d advection solver. It translates an arbitrary function through a periodic 1-D domain. The example code contains interfaces to LightDA and a python module that advances an ensemble of advect1d simulations, periodically stoppipng to assimilate synthetic observations.
