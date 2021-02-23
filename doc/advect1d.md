@@ -10,7 +10,7 @@ Building advect1d and its LightDA interface requires CMake, MPI, HDF5, and a For
 
 To build advect1d and its LightDA interface:
 
-```
+``` bash
 cd /path/to/lightda-examples
 mkdir examples/advect1d/build
 cd examples/advect1d/build

@@ -21,7 +21,7 @@ This project contains test cases and usage examples for LightDA. It contains the
 
 Building the examples requires CMake, MPI, HDF5, and a Fortran compiler. To build all examples:
 
-```
+``` bash
 mkdir build
 cd build
 cmake ../superbuild
