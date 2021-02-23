@@ -42,11 +42,12 @@ if ( NOT SKIP_DOC_GEN )
     set(DOC_DIR "${DOC_ROOT}/lightda-examples")
     set(PROJ_DIR "${PROJECT_SOURCE_DIR}")
     set(FORD_PROJECT_FILE "${CMAKE_CURRENT_BINARY_DIR}/lightda-examples.md")
-    set(FORD_PROJECT_EXCLUDE_DIRS "${MPI_Fortran_INCLUDE_DIRS};${PROJECT_BINARY_DIR};${PROJ_DIR}/build;${PROJ_DIR}/tests;${PROJ_DIR}/sphinx")
+    set(FORD_PROJECT_EXCLUDE_DIRS "${MPI_Fortran_INCLUDE_DIRS};${PROJECT_BINARY_DIR};${PROJ_DIR}/build;${PROJ_DIR}/tests;${PROJ_DIR}/sphinx;${PROJ_DIR}/examples/advect1d/build")
     set(MACRO_FLAG "")
     string(REPLACE ";" "\ninclude:" FORD_PROJECT_INCLUDES "${PROJ_DIR}/examples/advect1d/src")
     string(REPLACE ";" "\nexclude_dir:" FORD_PROJECT_EXCLUDE_DIRS "${FORD_PROJECT_EXCLUDE_DIRS}")
     string(REPLACE ";" "\nexclude:" FORD_PROJECT_EXCLUDE_FILES "${FORD_PROJECT_EXCLUDE_FILES}")
+    set(PAGE_DIR ${PROJ_DIR}/doc)
 
     configure_file(lightda-examples.md.in lightda-examples.md)
 
