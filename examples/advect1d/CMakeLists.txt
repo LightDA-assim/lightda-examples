@@ -40,3 +40,7 @@ if(PythonInterp_FOUND)
 else()
   message("No Python interpreter found. Not building python wrappers")
 endif()
+
+# Prepend path to sources and propagate to parent scope
+list(TRANSFORM ALL_SOURCES PREPEND "examples/advect1d/")
+set(ALL_SOURCES ${ALL_SOURCES} PARENT_SCOPE)
