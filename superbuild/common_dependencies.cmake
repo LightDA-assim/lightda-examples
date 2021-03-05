@@ -12,7 +12,7 @@ set(
 
 set(
   hdf5_exceptions_GIT_URL
-  "git@gitlab.hpc.mil:john.haiducek.ctr/fortran_exceptions.git" CACHE STRING
+  "git@gitlab.hpc.mil:john.haiducek.ctr/hdf5_exceptions.git" CACHE STRING
   "URL of fortran_exceptions git repository")
 
 set(
