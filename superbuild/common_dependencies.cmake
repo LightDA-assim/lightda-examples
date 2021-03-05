@@ -44,7 +44,8 @@ ExternalProject_Add(
   GIT_REPOSITORY ${hdf5_exceptions_GIT_URL}
   GIT_TAG main
   CMAKE_CACHE_ARGS
-        -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions)
+    -Dfortran_exceptions_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions/lib/cmake/fortran_exceptions
+    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions)
 
 ExternalProject_Add(lightda
   GIT_REPOSITORY ${lightda_GIT_URL}
