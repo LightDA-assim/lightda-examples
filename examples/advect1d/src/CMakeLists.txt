@@ -1,4 +1,6 @@
 set(ADVECT1D_ASSIMILATE_INTERFACES_SOURCES advect1d_observations.F90 advect1d_assimilate_interfaces.F90 advect1d_forward_operator.F90 advect1d_localizer.F90)
+set_source_files_properties(advect1d_assimilate_interfaces.F90
+  PROPERTIES COMPILE_FLAGS -cpp)
 add_library(advect1d_assimilate_interfaces ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES})
 target_link_libraries(advect1d_assimilate_interfaces PRIVATE lightda)
 target_link_libraries(advect1d_assimilate_interfaces PRIVATE hdf5_exceptions)
@@ -16,8 +18,6 @@ add_executable(advect1d_assimilate ${ADVECT1D_ASSIMILATE_SOURCES})
 target_link_libraries(advect1d_assimilate PRIVATE
   lightda lightda-lenkf-rsm system_mpi advect1d_assimilate_interfaces
   MPI::MPI_Fortran)
-set_source_files_properties(advect1d_assimilate_interfaces.F90
-  PROPERTIES COMPILE_FLAGS -cpp)
 set_target_properties(
   advect1d_assimilate
   PROPERTIES
