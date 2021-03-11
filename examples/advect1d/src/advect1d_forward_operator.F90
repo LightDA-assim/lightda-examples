@@ -4,7 +4,7 @@ module mod_advect1d_forward_operator
   use observations, ONLY: observation_set
   use advect1d_observations, ONLY: advected_quantity_observation_set
   use advect1d_assimilate_interfaces, ONLY: advect1d_interface
-  use exceptions, ONLY: error_status, throw, new_exception
+  use exceptions, ONLY: error_container, throw, new_exception
   use system_mpi
 
   implicit none
@@ -44,7 +44,7 @@ contains
         !! Forward operator
     class(observation_set)::obs_set
         !! Observation set
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
@@ -97,7 +97,7 @@ contains
         !! Forward operator
     class(observation_set)::obs_set
         !! Observation set
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
@@ -141,7 +141,7 @@ contains
     class(advect1d_forward_operator)::this
         !! Model interface
     type(advected_quantity_observation_set), intent(in) :: obs_set
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::imember, rank, ierr, iobs

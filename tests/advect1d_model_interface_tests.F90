@@ -3,7 +3,7 @@ module advect1d_model_interface_tests
   use advect1d_assimilate_interfaces, ONLY: advect1d_interface
   use random_integer, ONLY: randint
   use hdf5
-  use exceptions, ONLY: error_status, throw, new_exception
+  use exceptions, ONLY: error_container, throw, new_exception
   use hdf5_exceptions, ONLY: new_hdf5_exception
   use util, only: str
 
@@ -39,7 +39,7 @@ contains
         !! Iteration number
     real(kind=8)::ensemble(:, :)
         !! ensemble state
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::state_size, n_ensemble

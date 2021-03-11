@@ -4,7 +4,7 @@ module mod_advect1d_localization
   use assimilation_model_interface, ONLY: base_model_interface
   use advect1d_observations, ONLY: advected_quantity_observation_set
   use advect1d_assimilate_interfaces, ONLY: advect1d_interface
-  use exceptions, ONLY: error_status, throw, new_exception
+  use exceptions, ONLY: error_container, throw, new_exception
   use localization, ONLY: base_localizer, localize_gaspari_cohn
   use util, ONLY: str
 
@@ -38,7 +38,7 @@ contains
         !! Observation set 2
     integer, intent(in)::iobs2
         !! Index of an observation in observation set 2
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     ! Returns
@@ -104,7 +104,7 @@ contains
         !! Observation set
     integer, intent(in)::iobs
         !! Index in the observation set
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     ! Returns

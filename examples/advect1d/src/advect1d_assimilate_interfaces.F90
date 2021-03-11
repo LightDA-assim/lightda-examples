@@ -4,7 +4,7 @@ module advect1d_assimilate_interfaces
   use assimilation_model_interface, ONLY: base_model_interface
   use system_mpi
   use iso_c_binding
-  use exceptions, ONLY: throw, new_exception, error_status
+  use exceptions, ONLY: throw, new_exception, error_container
   use hdf5
   use hdf5_exceptions, ONLY: new_hdf5_exception
   use util, ONLY: str
@@ -39,7 +39,7 @@ contains
 
     integer(c_int), intent(in)::istep, n_ensemble, state_size
     MPI_COMM_TYPE, intent(in)::comm
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     type(advect1d_interface)::this
@@ -179,7 +179,7 @@ contains
         !! On exit, array holding the model state values
     integer, intent(in)::state_size
         !! Size of the model state
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     character(len=50)::preassim_filename
@@ -331,7 +331,7 @@ contains
     ! Arguments
     class(advect1d_interface)::this
         !! Model interface
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::imember, local_io_counter, rank, ierr
@@ -362,7 +362,7 @@ contains
         !! Model interface
     integer, intent(in)::imember
         !! Ensemble member index
-    class(error_status), intent(out), allocatable, optional :: status
+    class(error_container), intent(out), optional :: status
 
     type(darray)::state_darray
         !! State array represented as a darray object
@@ -413,7 +413,7 @@ contains
         !! Size of subset
     real(kind=8), intent(in)::subset_state(subset_size)
         !! Values to set
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::rank, ierr
@@ -446,7 +446,7 @@ contains
     ! Arguments
     class(advect1d_interface)::this
         !! Model interface
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::size
@@ -462,7 +462,7 @@ contains
     ! Arguments
     class(advect1d_interface)::this
         !! Model interface
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     integer::imember, rank, ierr, imember_local
@@ -506,7 +506,7 @@ contains
         !! Model state values to write
     integer, intent(in)::state_size
         !! Size of model state
-    class(error_status), intent(out), allocatable, optional::status
+    class(error_container), intent(out), optional::status
         !! Error status
 
     character(len=80)::postassim_filename
