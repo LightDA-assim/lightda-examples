@@ -18,7 +18,7 @@ if(PythonInterp_FOUND)
 
   set(PYTHON_SOURCES __init__.py animate_mpi.py advect1d.py libsuffix.py enkf.py)
 
-  list(TRANSFORM PYTHON_SOURCES PREPEND "advect1d/")
+  list_transform_prepend(PYTHON_SOURCES "advect1d/")
 
   foreach(file ${PYTHON_SOURCES})
     configure_file(${file} ${file} COPYONLY)
@@ -42,5 +42,5 @@ else()
 endif()
 
 # Prepend path to sources and propagate to parent scope
-list(TRANSFORM ALL_SOURCES PREPEND "examples/advect1d/")
+list_transform_prepend(ALL_SOURCES "examples/advect1d/")
 set(ALL_SOURCES ${ALL_SOURCES} PARENT_SCOPE)

@@ -27,5 +27,5 @@ set(ALL_SOURCES ${ADVECT1D_ASSIMILATE_INTERFACES_SOURCES};${ADVECT1D_SOURCES};
   ${ADVECT1D_ASSIMILATE_SOURCES})
 
 # Prepend path to sources and propagate to parent scope
-list(TRANSFORM ALL_SOURCES PREPEND "src/")
+list_transform_prepend(ALL_SOURCES "src/")
 set(ALL_SOURCES ${ALL_SOURCES} PARENT_SCOPE)
