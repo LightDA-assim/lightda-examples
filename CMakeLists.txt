@@ -33,7 +33,7 @@ function(list_transform_prepend var prefix)
     set(${var} "${temp}" PARENT_SCOPE)
 endfunction()
 
-add_subdirectory(examples/advect1d)
+add_subdirectory(examples)
 
 # -------------------
 # Build documentation
