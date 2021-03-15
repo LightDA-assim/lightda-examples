@@ -8,6 +8,14 @@ find_package(lightda REQUIRED)
 find_package(lightda-lenkf-rsm REQUIRED)
 find_package(hdf5_exceptions REQUIRED)
 
+function(list_transform_prepend var prefix)
+    set(temp "")
+    foreach(f ${${var}})
+        list(APPEND temp "${prefix}${f}")
+    endforeach()
+    set(${var} "${temp}" PARENT_SCOPE)
+endfunction()
+
 add_subdirectory(src)
 
 find_package(PythonInterp 3.5)
