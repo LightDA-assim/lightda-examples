@@ -37,7 +37,7 @@ if(PythonInterp_FOUND)
   add_custom_command(OUTPUT ${PYTHON_BUILD_TIMESTAMP}
     COMMAND ${PYTHON_EXECUTABLE} setup.py build --build-base ${CMAKE_CURRENT_BINARY_DIR}/python-build
     COMMAND ${CMAKE_COMMAND} -E touch ${PYTHON_BUILD_TIMESTAMP}
-    DEPENDS setup.py advect1d_assimilate ${PYTHON_SOURCES})
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/setup.py advect1d_assimilate ${PYTHON_SOURCES})
 
   add_custom_target(advect1d_python ALL DEPENDS ${PYTHON_BUILD_TIMESTAMP})
 
