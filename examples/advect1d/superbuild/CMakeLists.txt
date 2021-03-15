@@ -29,5 +29,6 @@ ExternalProject_Add(lightda-examples-advect1d
     -Dlightda_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/lightda/lib/cmake/lightda
     -Dlightda-lenkf-rsm_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/lightda-lenkf-rsm/lib/cmake/lightda-lenkf-rsm
     -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/lightda-examples-advect1d
+    -DHDF5_DIR:PATH=${HDF5_DIR}
     -DPYTHON_EXECUTABLE:STRING=${VENV_PYTHON}
   DEPENDS lightda lightda-lenkf-rsm venv_dir)

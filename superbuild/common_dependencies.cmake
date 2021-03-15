@@ -25,6 +25,28 @@ set(
   "git@gitlab.hpc.mil:john.haiducek.ctr/lightda-lenkf-rsm.git" CACHE STRING
   "URL of lightda-lenkf-rsm git repository")
 
+set(
+  HDF5_GIT_URL
+  "https://github.com/HDFGroup/hdf5.git" CACHE STRING
+  "URL of HDF5 git repository")
+
+enable_language(Fortran)
+find_package(HDF5 COMPONENTS Fortran)
+
+if(NOT ${HDF5_FOUND})
+  ExternalProject_Add(
+    HDF5
+    GIT_REPOSITORY ${HDF5_GIT_URL}
+    GIT_TAG hdf5-1_12_0
+    UPDATE_DISCONNECTED OFF
+    CMAKE_CACHE_ARGS
+      -DHDF5_BUILD_FORTRAN:BOOL=ON
+      -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/HDF5)
+  set(HDF5_DIR ${CMAKE_CURRENT_BINARY_DIR}/HDF5/share/cmake/hdf5)
+else()
+  add_custom_target(HDF5)
+endif()
+
 ExternalProject_Add(
   system_mpi
   GIT_REPOSITORY ${system_mpi_GIT_URL}
@@ -45,7 +67,9 @@ ExternalProject_Add(
   GIT_TAG main
   CMAKE_CACHE_ARGS
     -Dfortran_exceptions_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions/lib/cmake/fortran_exceptions
-    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions)
+    -DHDF5_DIR:PATH=${HDF5_DIR}
+    -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions
+  DEPENDS HDF5)
 
 ExternalProject_Add(lightda
   GIT_REPOSITORY ${lightda_GIT_URL}
