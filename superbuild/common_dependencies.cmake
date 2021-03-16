@@ -90,4 +90,3 @@ ExternalProject_Add(lightda-lenkf-rsm
     -Dlightda_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/lightda/lib/cmake/lightda
     -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/lightda-lenkf-rsm
   DEPENDS lightda)
-
