@@ -43,8 +43,6 @@ if(PythonInterp_FOUND)
 
   install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --root ${CMAKE_INSTALL_PREFIX} ${CMAKE_CURRENT_BINARY_DIR})")
 
-  install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${CMAKE_CURRENT_BINARY_DIR})")
-
 else()
   message("No Python interpreter found. Not building python wrappers")
 endif()
