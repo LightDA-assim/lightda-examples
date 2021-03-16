@@ -175,10 +175,10 @@ contains
         !! Iteration number
     integer, intent(in)::imember
         !! Ensemble member index
-    real(kind=8), intent(inout)::member_state(state_size)
-        !! On exit, array holding the model state values
     integer, intent(in)::state_size
         !! Size of the model state
+    real(kind=8), intent(inout)::member_state(state_size)
+        !! On exit, array holding the model state values
     class(error_container), intent(out), optional::status
         !! Error status
 
@@ -502,10 +502,10 @@ contains
         !! Number of ensemble members
     MPI_COMM_TYPE::comm
         !! MPI communicator
-    real(kind=8), intent(in)::member_state(state_size)
-        !! Model state values to write
     integer, intent(in)::state_size
         !! Size of model state
+    real(kind=8), intent(in)::member_state(state_size)
+        !! Model state values to write
     class(error_container), intent(out), optional::status
         !! Error status
 
