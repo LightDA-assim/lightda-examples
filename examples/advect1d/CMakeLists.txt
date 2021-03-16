@@ -50,5 +50,5 @@ else()
 endif()
 
 # Prepend path to sources and propagate to parent scope
-list_transform_prepend(ALL_SOURCES "examples/advect1d/")
+list_transform_prepend(ALL_SOURCES "advect1d/")
 set(ALL_SOURCES ${ALL_SOURCES} PARENT_SCOPE)
