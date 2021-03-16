@@ -24,7 +24,7 @@ contains
       s = sp
 
     case (2) ! MinMod
-      s = max(0., min(sm, sp))*sign(1.0_8, sm + sp)
+      s = max(0.0_8, min(sm, sp))*sign(1.0_8, sm + sp)
 
     case (3) ! Harmonic
       s = (sm*abs(sp) + abs(sm)*sp)/(abs(sm + abs(sp) + epsilon))
@@ -33,7 +33,7 @@ contains
       s = sqrt((sm*sp + abs(sm*sp))/2)*sign(1.0_8 + 0, sm + sp)
 
     case (5) !superbee
-      s = max(0., max(min(2*abs(sm), abs(sp)), min(abs(sm), 2*abs(sp)))) &
+      s = max(0.0_8, max(min(2*abs(sm), abs(sp)), min(abs(sm), 2*abs(sp)))) &
           *sign(1.0_8, sm + sp)
 
     end select
@@ -43,11 +43,11 @@ contains
   subroutine advect1d_step(u, a, dx, dt, limiter_type, nx) bind(c)
     implicit none
 
+    integer(c_int32_t), value :: limiter_type, nx
     real(c_double), dimension(nx), intent(inout) :: u, a
     real(c_double), value :: dx, dt
     real(kind=8) :: fr, fl
 
-    integer(c_int32_t), value :: limiter_type, nx
     integer::i
 
     call flux(2, fr, u, a, dx, dt, limiter_type)
@@ -75,8 +75,8 @@ contains
 
     sp = (u(i + 1) - u(i))/dx
 
-    ap = max(a(i - 1), 0.)
-    am = min(a(i), 0.)
+    ap = max(a(i - 1), 0.0_8)
+    am = min(a(i), 0.0_8)
 
     fp = ap*(u(i - 1) &
              + dx/2.0*(1.0 - a(i - 1)*dt/dx)*limiter(sm, sp, limiter_type))

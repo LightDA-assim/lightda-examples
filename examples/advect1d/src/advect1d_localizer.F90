@@ -80,7 +80,7 @@ contains
       return
     end if
 
-    distance = max(distance, 0.0)
+    distance = max(distance, 0.0_8)
 
     weight = localize_gaspari_cohn(distance, this%cutoff)
 
@@ -100,7 +100,7 @@ contains
         !! Model interface
     integer, intent(in)::imodel
         !! Index in the model state array
-    class(observation_set), pointer::obs_set
+    class(observation_set)::obs_set
         !! Observation set
     integer, intent(in)::iobs
         !! Index in the observation set
@@ -147,7 +147,7 @@ contains
       return
     end if
 
-    distance = max(distance, 0.0)
+    distance = max(distance, 0.0_8)
 
     if (imodel < domain_size) then
       cutoff = this%cutoff

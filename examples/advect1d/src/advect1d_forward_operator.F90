@@ -150,7 +150,7 @@ contains
 
     real(kind=8), pointer::member_state(:)
 
-    class(darray), allocatable, target::state
+    type(darray), target::state
 
     call mpi_comm_rank(this%model_interface%comm, rank, ierr)
 
