@@ -68,7 +68,7 @@ ExternalProject_Add(
   GIT_TAG main
   CMAKE_CACHE_ARGS
     -Dfortran_exceptions_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions/lib/cmake/fortran_exceptions
-    -DHDF5_DIR:PATH=${HDF5_DIR}
+    -Dhdf5_DIR:PATH=${HDF5_DIR}
     -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions
   DEPENDS HDF5)
 
