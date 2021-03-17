@@ -12,7 +12,7 @@ setup(
     package_dir={ '': '${CMAKE_CURRENT_BINARY_DIR}' },
     packages=['advect1d'],
     package_data={
-        'advect1d':['advect1d_assimilate','libadvect1d.dylib']
+        'advect1d':['advect1d_assimilate','$<TARGET_FILE:advect1d>']
     },
     install_requires=requirements
 )

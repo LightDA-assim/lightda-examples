@@ -22,7 +22,9 @@ find_package(PythonInterp 3.5)
 
 if(PythonInterp_FOUND)
 
-  configure_file(setup.py.in setup.py)
+  configure_file(setup.py.in setup.py.in)
+
+  file(GENERATE OUTPUT setup.py INPUT ${CMAKE_CURRENT_BINARY_DIR}/setup.py.in)
 
   set(PYTHON_SOURCES __init__.py animate_mpi.py advect1d.py libsuffix.py enkf.py)
 
