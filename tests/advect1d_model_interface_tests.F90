@@ -71,7 +71,7 @@ contains
     write (preassim_filename, "(A,I0,A)") &
       'ensembles/', istep, '/preassim.h5'
 
-    call system('mkdir -p ensembles/'//str(istep))
+    call execute_command_line('mkdir -p ensembles/'//str(istep))
 
     ! Create the file
     call h5fcreate_f(preassim_filename, H5F_ACC_TRUNC_F, h5file_h, ierr)
