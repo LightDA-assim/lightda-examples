@@ -50,9 +50,9 @@ contains
 
     integer::i
 
-    call flux(2, fr, u, a, dx, dt, limiter_type)
+    call flux(3, fr, u, a, dx, dt, limiter_type)
 
-    do i = 2, size(a) - 1
+    do i = 3, size(a) - 2
 
       fl = fr
 

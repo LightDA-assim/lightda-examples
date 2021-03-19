@@ -6,7 +6,7 @@ from scipy.signal import sawtooth, square, hann
 from scipy.ndimage.filters import convolve1d
 import advect1d
 
-def build_ensemble(n,n_ensemble,nghost=1):
+def build_ensemble(n,n_ensemble,nghost=2):
     """
     Generate an initial ensemble state.
 
@@ -30,7 +30,7 @@ def build_ensemble(n,n_ensemble,nghost=1):
     # Combine u and a into a single array and return
     return np.vstack([u,a])
 
-def updateboundary(u,a,nghost=1):
+def updateboundary(u,a,nghost=2):
     """
     Update ghost cells for u and a
 
@@ -279,7 +279,7 @@ class ensemble_animator(object):
     def __init__(self,n=100,n_ensemble=15,n_obs=80,cutoff=0.35):
     
         self.n=n
-        nghost=1
+        nghost=2
         domain_width=2*np.pi
         self.x=np.linspace(-float(nghost)/n*domain_width,domain_width*(n+nghost)/n,n)
         self.u_true=np.sin(8*self.x)
