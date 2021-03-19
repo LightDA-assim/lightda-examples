@@ -20,17 +20,19 @@ contains
 
     do isegment = 1, size(state_darray%segments)
 
-      state_segment => state_darray%segments(isegment)
+       state_segment => state_darray%segments(isegment)
 
-      if (isegment > 1 .and. &
-          state_segment%offset /= &
-          state_darray%segments(isegment + 1)%offset + &
-          state_darray%segments(isegment + 1)%length) then
+       if ( isegment < size(state_darray%segments) ) then
+          if (isegment > 1 .and. &
+               state_segment%offset /= &
+               state_darray%segments(isegment + 1)%offset + &
+               state_darray%segments(isegment + 1)%length) then
 
-        print *, 'Segment offset does not align with preceding segment'
-        error stop
+             print *, 'Segment offset does not align with preceding segment'
+             error stop
 
-      end if
+          end if
+       end if
 
       if (isegment == size(state_darray%segments) .and. &
           state_segment%offset + state_segment%length /= &
