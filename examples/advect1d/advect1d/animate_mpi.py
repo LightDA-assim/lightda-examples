@@ -323,7 +323,7 @@ class ensemble_animator(object):
         self.batch_boundaries=np.concatenate([batch_boundaries,[self.ensemble.shape[0]]])
         print(self.batch_boundaries)
 
-        cutoff_u_a=0.4
+        cutoff_u_a=0.9
 
         obs_model_distances=get_distances_periodic(
             self.obs_locations,np.tile(self.x,[2]),np.max(self.x))
