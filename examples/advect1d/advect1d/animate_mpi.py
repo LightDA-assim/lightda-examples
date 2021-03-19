@@ -74,8 +74,19 @@ def advance_to_time(u,a,dx,dt,limiter):
 
         # Advance u and a
         advance(u,a,dx,this_dt,limiter)
+
+        if not np.all(np.isfinite(u)):
+            raise ValueError('nan or inf found in u')
+
         a_old=a.copy()
+
+        if not np.all(np.isfinite(a)):
+            raise ValueError('nan or inf found in a')
+
         advance(a,a_old,dx,this_dt,limiter)
+
+        if not np.all(np.isfinite(a)):
+            raise ValueError('nan or inf found in a')
 
         # Update boundary conditions
         updateboundary(u,a)
