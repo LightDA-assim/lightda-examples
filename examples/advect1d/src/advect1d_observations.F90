@@ -92,7 +92,7 @@ contains
     end if
 
     ! Open the file
-    call h5fopen_f('ensembles/4/observations.h5', &
+    call h5fopen_f(obs_filename, &
                    H5F_ACC_RDONLY_F, h5file_h, ierr)
 
     if (ierr < 0) then
