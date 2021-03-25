@@ -9,6 +9,9 @@ set(system_mpi_INSTALL_DIR
   "${CMAKE_CURRENT_BINARY_DIR}/system_mpi" CACHE STRING
   "system_mpi installation directory")
 
+set(system_mpi_DIR "${system_mpi_INSTALL_DIR}/lib/cmake/system_mpi" CACHE PATH
+  "system_mpi directory")
+
 ExternalProject_Add(
   system_mpi
   GIT_REPOSITORY ${system_mpi_GIT_URL}

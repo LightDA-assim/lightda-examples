@@ -9,12 +9,16 @@ set(hdf5_exceptions_INSTALL_DIR
   "${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions" CACHE STRING
   "hdf5_exceptions installation directory")
 
+set(hdf5_exceptions_DIR
+  "${hdf5_exceptions_INSTALL_DIR}/lib/cmake/hdf5_exceptions" CACHE STRING
+  "hdf5_exceptions config directory")
+
 ExternalProject_Add(
   hdf5_exceptions
   GIT_REPOSITORY ${hdf5_exceptions_GIT_URL}
   GIT_TAG main
   CMAKE_CACHE_ARGS
-    -Dfortran_exceptions_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions/lib/cmake/fortran_exceptions
+    -Dfortran_exceptions_DIR:STRING=${fortran_exceptions_DIR}
     -Dhdf5_DIR:PATH=${HDF5_DIR}
     -DCMAKE_INSTALL_PREFIX:PATH=${hdf5_exceptions_INSTALL_DIR}
   DEPENDS HDF5)
