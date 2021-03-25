@@ -6,7 +6,7 @@ set(
   "URL of HDF5 git repository")
 
 set(HDF5_INSTALL_DIR
-  "${CMAKE_CURRENT_BINARY_DIR}/HDF5" CACHE STRING
+  "${CMAKE_CURRENT_BINARY_DIR}/HDF5" CACHE PATH
   "HDF5 installation directory")
 
 enable_language(Fortran)

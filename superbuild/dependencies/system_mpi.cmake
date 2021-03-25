@@ -6,7 +6,7 @@ set(
   "URL of system_mpi git repository")
 
 set(system_mpi_INSTALL_DIR
-  "${CMAKE_CURRENT_BINARY_DIR}/system_mpi" CACHE STRING
+  "${CMAKE_CURRENT_BINARY_DIR}/system_mpi" CACHE PATH
   "system_mpi installation directory")
 
 set(system_mpi_DIR "${system_mpi_INSTALL_DIR}/lib/cmake/system_mpi" CACHE PATH

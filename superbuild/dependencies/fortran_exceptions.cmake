@@ -6,11 +6,11 @@ set(
   "URL of fortran_exceptions git repository")
 
 set(fortran_exceptions_INSTALL_DIR
-  "${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions" CACHE STRING
+  "${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions" CACHE PATH
   "fortran_exceptions installation directory")
 
 set(fortran_exceptions_DIR
-  "${fortran_exceptions_INSTALL_DIR}/lib/cmake/fortran_exceptions" CACHE STRING
+  "${fortran_exceptions_INSTALL_DIR}/lib/cmake/fortran_exceptions" CACHE PATH
   "fortran_exceptions installation directory")
 
 ExternalProject_Add(
