@@ -1,0 +1,20 @@
+include(ExternalProject)
+
+set(
+  hdf5_exceptions_GIT_URL
+  "git@gitlab.hpc.mil:john.haiducek.ctr/hdf5_exceptions.git" CACHE STRING
+  "URL of fortran_exceptions git repository")
+
+set(hdf5_exceptions_INSTALL_DIR
+  "${CMAKE_CURRENT_BINARY_DIR}/hdf5_exceptions" CACHE STRING
+  "hdf5_exceptions installation directory")
+
+ExternalProject_Add(
+  hdf5_exceptions
+  GIT_REPOSITORY ${hdf5_exceptions_GIT_URL}
+  GIT_TAG main
+  CMAKE_CACHE_ARGS
+    -Dfortran_exceptions_DIR:STRING=${CMAKE_CURRENT_BINARY_DIR}/fortran_exceptions/lib/cmake/fortran_exceptions
+    -Dhdf5_DIR:PATH=${HDF5_DIR}
+    -DCMAKE_INSTALL_PREFIX:PATH=${hdf5_exceptions_INSTALL_DIR}
+  DEPENDS HDF5)
