@@ -53,4 +53,3 @@ RUN cmake \
   -Dlightda-lenkf-rsm_GIT_URL=/repositories/lightda-lenkf-rsm.git \
   /src/superbuild
 RUN make -j8
-RUN make install
