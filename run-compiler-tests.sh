@@ -6,4 +6,8 @@ LOCAL_REPO_DIR=/Users/jhaiduce/Development/repositories
 
 docker build -t lightda-examples-src -f Dockerfile.src .
 docker build -t lightda-examples-dependency-repos -f Dockerfile.repos $LOCAL_REPO_DIR
-docker build --build-arg compiler_image=gcc:10.2.0 compiler-tests/gcc
+docker build -t lightda-examples-gcc:latest --build-arg compiler_image=gcc:latest compiler-tests/gcc
+docker build -t lightda-examples-gcc:10.2.0 --build-arg compiler_image=gcc:10.2.0 compiler-tests/gcc
+docker build -t lightda-examples-gcc:8.4.0 --build-arg compiler_image=gcc:8.4.0 compiler-tests/gcc
+docker build -t lightda-examples-gcc:9.3.0 --build-arg compiler_image=gcc:9.3.0 compiler-tests/gcc
+docker build -t lightda-examples-gcc:4.9.4-hdf5-1_10-7 --build-arg compiler_image=gcc:4.9.4 --build-arg hdf5_tag=hdf5-1_10_7 compiler-tests/gcc
