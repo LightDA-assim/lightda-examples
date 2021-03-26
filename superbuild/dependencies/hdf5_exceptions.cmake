@@ -21,4 +21,4 @@ ExternalProject_Add(
     -Dfortran_exceptions_DIR:PATH=${fortran_exceptions_DIR}
     -Dhdf5_DIR:PATH=${HDF5_DIR}
     -DCMAKE_INSTALL_PREFIX:PATH=${hdf5_exceptions_INSTALL_DIR}
-  DEPENDS HDF5)
+  DEPENDS HDF5 fortran_exceptions)
