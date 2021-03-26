@@ -1,4 +1,5 @@
-FROM gcc:10.2.0
+ARG compiler_image=gcc:latest
+FROM $compiler_image AS gcc_cmake
 
 RUN apt-get update
 RUN apt-get -y install cmake
