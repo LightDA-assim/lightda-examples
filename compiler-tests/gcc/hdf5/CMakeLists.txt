@@ -9,6 +9,11 @@ set(
   "https://github.com/HDFGroup/hdf5.git" CACHE STRING
   "URL of HDF5 git repository")
 
+set(
+  HDF5_GIT_TAG
+  "hdf5-1_12_0" CACHE STRING
+  "URL of HDF5 git repository")
+
 set(HDF5_INSTALL_DIR
   "${CMAKE_CURRENT_BINARY_DIR}/HDF5" CACHE PATH
   "HDF5 installation directory")
@@ -20,9 +25,7 @@ if(NOT ${HDF5_FOUND})
   ExternalProject_Add(
     HDF5
     GIT_REPOSITORY ${HDF5_GIT_URL}
-    GIT_TAG hdf5-1_12_0
-    UPDATE_COMMAND ""
-    UPDATE_DISCONNECTED OFF
+    GIT_TAG ${HDF5_GIT_TAG}
     CMAKE_CACHE_ARGS
       -DHDF5_BUILD_FORTRAN:BOOL=ON
       -DCMAKE_INSTALL_PREFIX:PATH=${HDF5_INSTALL_DIR})

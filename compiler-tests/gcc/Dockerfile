@@ -10,6 +10,7 @@ USER build
 
 WORKDIR /build
 
+ARG hdf5_tag=hdf5-1_12_0
 FROM gcc_cmake as hdf5-build
 
 USER root
@@ -19,8 +20,7 @@ RUN mkdir /hdf5
 RUN chown build:build /hdf5
 
 USER build
-
-RUN cmake -DHDF5_INSTALL_DIR=/hdf5 /src
+RUN cmake -DHDF5_INSTALL_DIR=/hdf5 -DHDF5_GIT_TAG=$hdf5_tag /src
 RUN make -j8
 
 USER root
