@@ -56,6 +56,8 @@ USER build
 
 ENV MPI_HOME=/usr/local/openmpi
 
+ENV FFLAGS="-std=f2008 -fcheck=all"
+
 RUN cmake \
   -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
   -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
