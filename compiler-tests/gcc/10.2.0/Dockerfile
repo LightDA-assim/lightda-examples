@@ -34,7 +34,9 @@ COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
 COPY --from=lightda-examples-src / /src
 COPY --from=lightda-examples-dependency-repos / /repositories
 
-RUN mkdir /build
+RUN useradd --home-dir /build build
+
+USER build
 
 WORKDIR /build
 
