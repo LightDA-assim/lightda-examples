@@ -17,4 +17,6 @@ ExternalProject_Add(
   GIT_REPOSITORY ${system_mpi_GIT_URL}
   GIT_TAG main
   CMAKE_CACHE_ARGS
+        -DMPI_Fortran_COMPILER:PATH=${MPI_Fortran_COMPILER}
+        -DMPI_C_COMPILER:PATH=${MPI_C_COMPILER}
         -DCMAKE_INSTALL_PREFIX:PATH=${system_mpi_INSTALL_DIR})
