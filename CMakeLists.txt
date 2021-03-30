@@ -25,10 +25,6 @@ else()
   add_definitions(-DOVERRIDABLE_FINALIZERS)
 endif()
 
-find_package(lightda REQUIRED)
-find_package(lightda-lenkf-rsm REQUIRED)
-find_package(hdf5_exceptions REQUIRED)
-
 function(list_transform_prepend var prefix)
     set(temp "")
     foreach(f ${${var}})

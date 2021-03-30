@@ -8,7 +8,7 @@ enable_language(Fortran)
 # which prevents gfortran from finding Fortran module files
 set(CMAKE_NO_SYSTEM_FROM_IMPORTED ON)
 
-find_package(lightda REQUIRED)
+find_package(lightda REQUIRED NO_POLICY_SCOPE)
 find_package(lightda-lenkf-rsm REQUIRED)
 find_package(hdf5_exceptions REQUIRED)
 

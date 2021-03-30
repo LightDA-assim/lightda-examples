@@ -11,6 +11,10 @@ if(FPRETTIFY_EXECUTABLE)
     -P ${CMAKE_CURRENT_SOURCE_DIR}/test_and_check_regex.cmake)
 endif()
 
+find_package(lightda REQUIRED NO_POLICY_SCOPE)
+find_package(lightda-lenkf-rsm REQUIRED)
+find_package(hdf5_exceptions REQUIRED)
+
 add_library(model_interface_tests model_interface_tests.f90)
 target_link_libraries(model_interface_tests PRIVATE lightda)
 
