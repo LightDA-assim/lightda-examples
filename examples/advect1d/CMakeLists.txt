@@ -22,7 +22,7 @@ endfunction()
 
 add_subdirectory(src)
 
-find_package(PythonInterp 3.5)
+find_package(PythonInterp 3.5 QUIET)
 
 if(PythonInterp_FOUND)
 
@@ -50,7 +50,7 @@ if(PythonInterp_FOUND)
   install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --root ${CMAKE_INSTALL_PREFIX} ${CMAKE_CURRENT_BINARY_DIR})")
 
 else()
-  message("No Python interpreter found. Not building python wrappers")
+  message("No suitable Python interpreter found (need at least Python 3.5). Not building python wrappers.")
 endif()
 
 # Prepend path to sources and propagate to parent scope
