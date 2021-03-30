@@ -1,8 +1,12 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.0.2)
 
 project(lightda-examples)
 
 enable_language(Fortran)
+
+# Prevent older CMake versions from setting include directories with -isystem,
+# which prevents gfortran from finding Fortran module files
+set(CMAKE_NO_SYSTEM_FROM_IMPORTED ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/modules/")
 

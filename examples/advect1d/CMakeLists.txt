@@ -1,8 +1,12 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.0.2)
 
 project(lightda-examples-advect1d)
 
 enable_language(Fortran)
+
+# Prevent older CMake versions from setting include directories with -isystem,
+# which prevents gfortran from finding Fortran module files
+set(CMAKE_NO_SYSTEM_FROM_IMPORTED ON)
 
 find_package(lightda REQUIRED)
 find_package(lightda-lenkf-rsm REQUIRED)
@@ -24,7 +28,7 @@ if(PythonInterp_FOUND)
 
   configure_file(setup.py.in setup.py.in)
 
-  file(GENERATE OUTPUT setup.py INPUT ${CMAKE_CURRENT_BINARY_DIR}/setup.py.in)
+  file(GENERATE OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/setup.py INPUT ${CMAKE_CURRENT_BINARY_DIR}/setup.py.in)
 
   set(PYTHON_SOURCES __init__.py animate_mpi.py advect1d.py libsuffix.py enkf.py)
 
