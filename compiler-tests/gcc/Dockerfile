@@ -56,6 +56,8 @@ USER build
 
 ENV MPI_HOME=/usr/local/openmpi
 
+ENV PATH=/usr/local/openmpi/bin:$PATH
+
 ENV FFLAGS="-std=f2008 -fcheck=all"
 
 RUN cmake \
