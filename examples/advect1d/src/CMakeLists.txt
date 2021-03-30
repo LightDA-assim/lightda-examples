@@ -17,7 +17,7 @@ set(ADVECT1D_ASSIMILATE_SOURCES advect1d_assimilate.f90)
 add_executable(advect1d_assimilate ${ADVECT1D_ASSIMILATE_SOURCES})
 target_link_libraries(advect1d_assimilate PRIVATE
   lightda lightda-lenkf-rsm system_mpi advect1d_assimilate_interfaces
-  MPI::MPI_Fortran hdf5_exceptions)
+  hdf5_exceptions)
 set_target_properties(
   advect1d_assimilate
   PROPERTIES
