@@ -22,7 +22,7 @@ endfunction()
 
 add_subdirectory(src)
 
-find_package(PythonInterp 3.5 QUIET)
+find_package(PythonInterp 3.4 QUIET)
 
 if(PythonInterp_FOUND)
 
