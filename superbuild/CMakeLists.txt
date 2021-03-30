@@ -7,6 +7,8 @@ include(common_dependencies.cmake)
 ExternalProject_Add(lightda-examples
   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..
   CMAKE_CACHE_ARGS
+    -DMPI_Fortran_COMPILER:PATH=${MPI_Fortran_COMPILER}
+    -DMPI_C_COMPILER:PATH=${MPI_C_COMPILER}
     -Dsystem_mpi_DIR:PATH=${system_mpi_DIR}
     -Dfortran_exceptions_DIR:PATH=${fortran_exceptions_DIR}
     -Dhdf5_exceptions_DIR:PATH=${hdf5_exceptions_DIR}
