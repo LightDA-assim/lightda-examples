@@ -2,7 +2,7 @@ ARG compiler_image=gcc:latest
 FROM $compiler_image AS gcc_cmake
 
 RUN apt-get update
-RUN apt-get -y install cmake
+RUN apt-get -y install cmake git
 
 RUN useradd --home-dir /build build
 
