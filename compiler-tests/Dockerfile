@@ -1,8 +1,9 @@
 ARG compiler_image=gcc:latest
 FROM $compiler_image AS gcc_cmake
 
-RUN apt-get update
-RUN apt-get -y install cmake git
+RUN if command apt-get; then apt-get update; fi
+RUN if command apt-get; then apt-get -y install cmake git; fi
+RUN if command yum; then yum -y install cmake git; fi
 
 RUN useradd --home-dir /build build
 
@@ -44,7 +45,8 @@ RUN make install
 FROM gcc_cmake as lightda-examples-build
 
 USER root
-RUN apt-get install -y liblapack-dev python3-pip
+RUN if command apt-get; then apt-get install -y liblapack-dev python3-pip; fi
+RUN if command yum; then yum -y install lapack-devel python3; fi
 RUN pip3 install fprettify ford
 
 COPY --from=hdf5-build /hdf5/ /usr/
