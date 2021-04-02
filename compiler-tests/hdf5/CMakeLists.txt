@@ -23,7 +23,7 @@ find_package(HDF5 COMPONENTS Fortran)
 
 if(NOT ${HDF5_FOUND})
 
-  if(${CMAKE_VERSION} VERSION_GREATER 3.11)
+  if(NOT ${CMAKE_VERSION} VERSION_LESS 3.12)
 
     ExternalProject_Add(
       HDF5
