@@ -5,6 +5,13 @@ RUN if command apt-get; then apt-get update; fi
 RUN if command apt-get; then apt-get -y install cmake git; fi
 RUN if command yum; then yum -y install cmake git; fi
 
+ARG FC=gfortran
+ARG FFLAGS="-g -fbacktrace -std=f2008 -fcheck=all"
+
+ENV FC=$FC
+ENV F9X=FC
+ENV FFLAGS=$FFLAGS
+
 RUN useradd --home-dir /build build
 
 USER build
@@ -59,8 +66,6 @@ USER build
 ENV MPI_HOME=/usr/local/openmpi
 
 ENV PATH=/usr/local/openmpi/bin:$PATH
-
-ENV FFLAGS="-std=f2008 -fcheck=all"
 
 RUN cmake \
   -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
