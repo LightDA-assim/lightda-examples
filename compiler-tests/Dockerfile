@@ -9,7 +9,7 @@ ARG FC=gfortran
 ARG FFLAGS="-g -fbacktrace -std=f2008 -fcheck=all"
 
 ENV FC=$FC
-ENV F9X=FC
+ENV F9X=$FC
 ENV FFLAGS=$FFLAGS
 
 RUN useradd --home-dir /build build
