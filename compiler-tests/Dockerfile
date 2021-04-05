@@ -1,9 +1,9 @@
 ARG compiler_image=gcc:latest
 FROM $compiler_image AS build_base
 
-RUN if command apt-get; then apt-get update; fi
-RUN if command apt-get; then apt-get -y install cmake git; fi
-RUN if command yum; then yum -y install cmake git; fi
+RUN if command -v apt-get; then apt-get update; fi
+RUN if command -v apt-get; then apt-get -y install cmake git; fi
+RUN if command -v yum; then yum -y install cmake git; fi
 
 ARG FC=gfortran
 ARG FFLAGS="-g -fbacktrace -std=f2008 -fcheck=all"
@@ -52,8 +52,8 @@ RUN make install
 FROM build_base as lightda-examples-build
 
 USER root
-RUN if command apt-get; then apt-get install -y liblapack-dev python3-pip; fi
-RUN if command yum; then yum -y install lapack-devel python3; fi
+RUN if command -v apt-get; then apt-get install -y liblapack-dev python3-pip; fi
+RUN if command -v yum; then yum -y install lapack-devel python3; fi
 RUN pip3 install fprettify ford
 
 COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
