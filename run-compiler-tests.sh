@@ -3,7 +3,7 @@
 set -e
 
 LOCAL_REPO_DIR=/Users/jhaiduce/Development/repositories
-IFORT_FFLAGS="-g -traceback -check all -standard-semantics -stand f08"
+IFORT_FFLAGS="-g -traceback -check all -standard-semantics -assume nostd_mod_proc_name -stand f08"
 
 docker build -t lightda-examples-src -f Dockerfile.src .
 docker build -t lightda-examples-dependency-repos -f Dockerfile.repos $LOCAL_REPO_DIR
