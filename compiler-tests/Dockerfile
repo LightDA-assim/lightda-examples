@@ -17,15 +17,15 @@ FROM gcc_cmake as hdf5-build
 USER root
 
 COPY hdf5/ /src
-RUN mkdir /hdf5
-RUN chown build:build /hdf5
+RUN mkdir -p /usr/local/hdf5
+RUN chown build:build /usr/local/hdf5
 
 USER build
-RUN cmake -DHDF5_INSTALL_DIR=/hdf5 -DHDF5_GIT_TAG=$hdf5_tag /src
+RUN cmake -DHDF5_INSTALL_DIR=/usr/local/hdf5 -DHDF5_GIT_TAG=$hdf5_tag /src
 RUN make -j8
 
 USER root
-RUN chown -R root:root /hdf5
+RUN chown -R root:root /usr/local/hdf5
 
 FROM gcc_cmake as openmpi-build
 
@@ -49,7 +49,7 @@ RUN if command apt-get; then apt-get install -y liblapack-dev python3-pip; fi
 RUN if command yum; then yum -y install lapack-devel python3; fi
 RUN pip3 install fprettify ford
 
-COPY --from=hdf5-build /hdf5/ /usr/
+COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
 COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
 COPY --from=lightda-examples-src / /src
 COPY --from=lightda-examples-dependency-repos / /repositories
@@ -68,7 +68,7 @@ RUN cmake \
   -Dsystem_mpi_GIT_URL=/repositories/system_mpi.git \
   -Dfortran_exceptions_GIT_URL=/repositories/fortran_exceptions.git \
   -Dhdf5_exceptions_GIT_URL=/repositories/hdf5_exceptions.git \
-  -DHDF5_DIR=/usr/share/cmake/hdf5 \
+  -DHDF5_DIR=/usr/local/hdf5/share/cmake/hdf5 \
   -Dlightda_GIT_URL=/repositories/lightda.git \
   -Dlightda-lenkf-rsm_GIT_URL=/repositories/lightda-lenkf-rsm.git \
   /src/superbuild
