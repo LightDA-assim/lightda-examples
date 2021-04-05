@@ -7,10 +7,14 @@ RUN if command -v yum; then yum -y install cmake git; fi
 
 ARG FC=gfortran
 ARG FFLAGS="-g -fbacktrace -std=f2008 -fcheck=all"
+ARG CC=gcc
+ARG CXX=gxx
 
 ENV FC=$FC
 ENV F9X=$FC
 ENV FFLAGS=$FFLAGS
+ENV CC=$CC
+ENV CXX=$CXX
 
 RUN useradd --home-dir /build build
 
