@@ -1,5 +1,5 @@
 ARG compiler_image=gcc:latest
-FROM $compiler_image AS gcc_cmake
+FROM $compiler_image AS build_base
 
 RUN if command apt-get; then apt-get update; fi
 RUN if command apt-get; then apt-get -y install cmake git; fi
@@ -12,7 +12,7 @@ USER build
 WORKDIR /build
 
 ARG hdf5_tag=hdf5-1_12_0
-FROM gcc_cmake as hdf5-build
+FROM build_base as hdf5-build
 
 USER root
 
@@ -27,7 +27,7 @@ RUN make -j8
 USER root
 RUN chown -R root:root /usr/local/hdf5
 
-FROM gcc_cmake as openmpi-build
+FROM build_base as openmpi-build
 
 USER root
 ADD https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.0.tar.bz2 .
@@ -42,7 +42,7 @@ RUN make all
 USER root
 RUN make install
 
-FROM gcc_cmake as lightda-examples-build
+FROM build_base as lightda-examples-build
 
 USER root
 RUN if command apt-get; then apt-get install -y liblapack-dev python3-pip; fi
