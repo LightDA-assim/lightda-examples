@@ -10,9 +10,14 @@ set(HDF5_INSTALL_DIR
   "HDF5 installation directory")
 
 enable_language(Fortran)
-find_package(HDF5 COMPONENTS Fortran)
 
-if(NOT ${HDF5_FOUND})
+find_package(HDF5 COMPONENTS Fortran QUIET)
+find_package(hdf5 COMPONENTS Fortran QUIET)
+
+if(NOT HDF5_FOUND AND NOT hdf5_FOUND
+    AND NOT TARGET hdf5::hdf5_fortran
+    AND NOT TARGET hdf5_fortran-static
+    AND NOT TARGET hdf5_fortran-shared)
   ExternalProject_Add(
     HDF5
     GIT_REPOSITORY ${HDF5_GIT_URL}
