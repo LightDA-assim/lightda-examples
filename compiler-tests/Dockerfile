@@ -68,6 +68,7 @@ COPY --from=lightda-examples-dependency-repos / /repositories
 USER build
 
 ENV MPI_HOME=/usr/local/openmpi
+ENV HDF5_ROOT=/usr/local/hdf5
 
 ENV PATH=/usr/local/openmpi/bin:$PATH
 
@@ -78,7 +79,6 @@ RUN cmake \
   -Dfortran_exceptions_GIT_URL=/repositories/fortran_exceptions.git \
   -Dhdf5_exceptions_GIT_URL=/repositories/hdf5_exceptions.git \
   -DHDF5_DIR=/usr/local/hdf5/share/cmake/hdf5 \
-  -DHDF5_ROOT=/usr/local/hdf5 \
   -Dlightda_GIT_URL=/repositories/lightda.git \
   -Dlightda-lenkf-rsm_GIT_URL=/repositories/lightda-lenkf-rsm.git \
   /src/superbuild
