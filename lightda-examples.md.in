@@ -11,6 +11,8 @@ include: ${FORD_PROJECT_INCLUDES}
 extra_mods: exceptions:file://${fortran_exceptions_DOCDIR}/index.html
 extra_mods: system_mpi:file://${system_mpi_DOCDIR}/index.html
 page_dir: ${PAGE_DIR}
+license: by
+revision: DISTRIBUTION A: Approved for public release, distribution is unlimited
 ---
 
 This project contains test cases and usage examples for LightDA. It contains the following example implementations:
