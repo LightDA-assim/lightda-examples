@@ -1,6 +1,6 @@
 .git
 compiler-tests
-build
+build*
 *~
 \#*\#
 .\#*
