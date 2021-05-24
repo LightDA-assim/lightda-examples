@@ -1,7 +1,4 @@
+ARG repo=lightda.git
 FROM scratch
 
-COPY system_mpi.git system_mpi.git
-COPY fortran_exceptions.git fortran_exceptions.git
-COPY hdf5_exceptions.git hdf5_exceptions.git
-COPY lightda.git lightda.git
-COPY lightda-lenkf-rsm.git lightda-lenkf-rsm.git
+COPY $repo $repo

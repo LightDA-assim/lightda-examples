@@ -53,33 +53,164 @@ RUN make all
 USER root
 RUN make install
 
-FROM build_base as lightda-examples-build
+FROM build_base AS build_with_ford
 
 USER root
 RUN if command -v apt-get; then apt-get install -y liblapack-dev python3-pip; fi
 RUN if command -v yum; then yum -y install lapack-devel python3; fi
 RUN pip3 install fprettify ford
 
-COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
+FROM build_with_ford as system_mpi-build
+
+USER root
 COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
-COPY --from=lightda-examples-src / /src
-COPY --from=lightda-examples-dependency-repos / /repositories
+COPY --from=system_mpi-repo / /repositories
 
 USER build
 
 ENV MPI_HOME=/usr/local/openmpi
-ENV HDF5_ROOT=/usr/local/hdf5
-
 ENV PATH=/usr/local/openmpi/bin:$PATH
 
+RUN git clone --branch main /repositories/system_mpi.git
+RUN mkdir build
+RUN cd /build/build
 RUN cmake \
   -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
   -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
-  -Dsystem_mpi_GIT_URL=/repositories/system_mpi.git \
-  -Dfortran_exceptions_GIT_URL=/repositories/fortran_exceptions.git \
-  -Dhdf5_exceptions_GIT_URL=/repositories/hdf5_exceptions.git \
-  -DHDF5_DIR=/usr/local/hdf5/share/cmake/hdf5 \
-  -Dlightda_GIT_URL=/repositories/lightda.git \
-  -Dlightda-lenkf-rsm_GIT_URL=/repositories/lightda-lenkf-rsm.git \
-  /src/superbuild
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  -DCMAKE_INSTALL_PREFIX:PATH=/build/install \
+  /build/system_mpi
+RUN make -j8
+RUN make install
+
+FROM build_with_ford as fortran_exceptions-build
+
+USER root
+COPY --from=fortran_exceptions-repo / /repositories
+
+USER build
+
+WORKDIR /build
+RUN git clone --branch main /repositories/fortran_exceptions.git
+RUN mkdir build
+WORKDIR /build/build
+RUN cmake \
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  -DCMAKE_INSTALL_PREFIX:PATH=/build/install \
+  /build/fortran_exceptions
+RUN make -j8
+RUN make install
+
+FROM build_with_ford as hdf5_exceptions-build
+
+USER root
+COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
+COPY --from=fortran_exceptions-build /build/install /build/install
+COPY --from=hdf5_exceptions-repo / /repositories
+
+USER build
+
+ENV HDF5_ROOT=/usr/local/hdf5
+
+RUN git clone --branch main /repositories/hdf5_exceptions.git
+RUN mkdir build
+RUN cd /build/build
+RUN cmake \
+  -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  -DCMAKE_INSTALL_PREFIX:PATH=/build/install \
+  /build/hdf5_exceptions
+RUN make -j8
+RUN make install
+
+FROM build_with_ford as lightda-build
+
+USER root
+COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
+COPY --from=fortran_exceptions-build /build/install /build/install
+COPY --from=system_mpi-build /build/install /build/install
+COPY --from=lightda-repo / /repositories
+
+USER build
+
+ENV MPI_HOME=/usr/local/openmpi
+ENV PATH=/usr/local/openmpi/bin:$PATH
+
+RUN git clone --branch main /repositories/lightda.git
+RUN mkdir build
+RUN cd /build/build
+
+RUN cmake \
+  -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
+  -Dsystem_mpi_DIR:PATH=/build/install/lib/cmake/system_mpi \
+  -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
+  -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  -DCMAKE_INSTALL_PREFIX:PATH=/build/install \
+  /build/lightda
+RUN make -j8
+RUN make install
+
+FROM build_with_ford as lightda_lenkf_rsm-build
+
+USER root
+COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
+COPY --from=fortran_exceptions-build /build/install /build/install
+COPY --from=system_mpi-build /build/install /build/install
+COPY --from=lightda-build /build/install /build/install
+COPY --from=lightda_lenkf_rsm-repo / /repositories
+
+USER build
+
+ENV MPI_HOME=/usr/local/openmpi
+ENV PATH=/usr/local/openmpi/bin:$PATH
+
+RUN git clone --branch main /repositories/lightda-lenkf-rsm.git
+RUN mkdir build
+RUN cd /build/build
+
+RUN cmake \
+  -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
+  -Dsystem_mpi_DIR:PATH=/build/install/lib/cmake/system_mpi \
+  -Dlightda_DIR:PATH=/build/install/lib/cmake/lightda \
+  -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
+  -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  -DCMAKE_INSTALL_PREFIX:PATH=/build/install \
+  /build/lightda-lenkf-rsm
+RUN make -j8
+RUN make install
+
+FROM build_with_ford as lightda-examples-build
+
+USER root
+
+COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
+COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
+COPY --from=lightda-examples-src / /src
+COPY --from=system_mpi-build /build/install /build/install
+COPY --from=fortran_exceptions-build /build/install /build/install
+COPY --from=hdf5_exceptions-build /build/install /build/install
+COPY --from=lightda-build /build/install /build/install
+COPY --from=lightda_lenkf_rsm-build /build/install /build/install
+
+USER build
+
+ENV MPI_HOME=/usr/local/openmpi
+ENV PATH=/usr/local/openmpi/bin:$PATH
+
+ENV HDF5_ROOT=/usr/local/hdf5
+
+RUN mkdir build
+WORKDIR /build/build
+RUN cmake \
+  -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
+  -Dhdf5_exceptions_DIR:PATH=/build/install/lib/cmake/hdf5_exceptions \
+  -Dsystem_mpi_DIR:PATH=/build/install/lib/cmake/system_mpi \
+  -Dlightda_DIR:PATH=/build/install/lib/cmake/lightda \
+  -Dlightda-lenkf-rsm_DIR:PATH=/build/install/lib/cmake/lightda-lenkf-rsm \
+  -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
+  -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
+  -DPYTHON_EXECUTABLE:PATH=/usr/bin/python3 \
+  /src
 RUN make -j8
