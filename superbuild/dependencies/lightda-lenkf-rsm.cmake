@@ -20,5 +20,6 @@ ExternalProject_Add(lightda-lenkf-rsm
     -Dsystem_mpi_DIR:PATH=${system_mpi_DIR}
     -Dfortran_exceptions_DIR:PATH=${fortran_exceptions_DIR}
     -Dlightda_DIR:PATH=${lightda_DIR}
+    -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
     -DCMAKE_INSTALL_PREFIX:PATH=${lightda-lenkf-rsm_INSTALL_DIR}
   DEPENDS lightda)

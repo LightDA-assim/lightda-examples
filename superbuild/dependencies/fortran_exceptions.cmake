@@ -18,5 +18,6 @@ ExternalProject_Add(
   GIT_REPOSITORY ${fortran_exceptions_GIT_URL}
   GIT_TAG main
   CMAKE_CACHE_ARGS
+    -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
         -DCMAKE_INSTALL_PREFIX:PATH=${fortran_exceptions_INSTALL_DIR})
 

@@ -21,5 +21,6 @@ ExternalProject_Add(lightda
      -DMPI_C_COMPILER:PATH=${MPI_C_COMPILER}
      -Dsystem_mpi_DIR:PATH=${system_mpi_DIR}
      -Dfortran_exceptions_DIR:PATH=${fortran_exceptions_DIR}
+    -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
     -DCMAKE_INSTALL_PREFIX:PATH=${lightda_INSTALL_DIR}
   DEPENDS system_mpi fortran_exceptions)
