@@ -57,7 +57,7 @@ contains
         !! Model interface
     integer, intent(in)::istep
         !! Iteration number
-    class(error_container), intent(out), optional::status
+    type(error_container), intent(out), optional::status
         !! Error status
 
     character(:), allocatable::obs_filename
@@ -300,7 +300,7 @@ contains
     ! Arguments
     class(advected_quantity_observation_set)::this
         !! Observation set
-    class(error_container), intent(out), optional::status
+    type(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
@@ -316,7 +316,7 @@ contains
     ! Arguments
     class(advected_quantity_observation_set)::this
         !! Observation set
-    class(error_container), intent(out), optional::status
+    type(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
@@ -332,7 +332,7 @@ contains
     ! Arguments
     class(advected_quantity_observation_set)::this
         !! Observation set
-    class(error_container), intent(out), optional::status
+    type(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
@@ -352,7 +352,7 @@ contains
         !! Observation set
     integer::iobs
         !! Index into the observation set
-    class(error_container), intent(out), optional::status
+    type(error_container), intent(out), optional::status
         !! Error status
 
     ! Result
