@@ -6,6 +6,7 @@ LOCAL_REPO_DIR=/Users/jhaiduce/Development/repositories
 IFORT_FFLAGS="-g -traceback -check all -standard-semantics -assume nostd_mod_proc_name -stand f08"
 
 docker build -t lightda-examples-src -f Dockerfile.src .
+docker build -t lightda-src -f Dockerfile.src /Users/jhaiduce/Development/lightda
 docker build -t system_mpi-repo --build-arg repo=system_mpi.git -f Dockerfile.repos $LOCAL_REPO_DIR
 docker build -t fortran_exceptions-repo --build-arg repo=fortran_exceptions.git -f Dockerfile.repos $LOCAL_REPO_DIR
 docker build -t hdf5_exceptions-repo --build-arg repo=hdf5_exceptions.git -f Dockerfile.repos $LOCAL_REPO_DIR
