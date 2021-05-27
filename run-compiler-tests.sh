@@ -12,6 +12,7 @@ docker build -t fortran_exceptions-repo --build-arg repo=fortran_exceptions.git 
 docker build -t hdf5_exceptions-repo --build-arg repo=hdf5_exceptions.git -f Dockerfile.repos $LOCAL_REPO_DIR
 docker build -t lightda-repo --build-arg repo=lightda.git -f Dockerfile.repos $LOCAL_REPO_DIR
 docker build -t lightda_lenkf_rsm-repo --build-arg repo=lightda_lenkf_rsm.git -f Dockerfile.repos $LOCAL_REPO_DIR
+docker build -t lightda-examples-fedora:34 --build-arg compiler_image=fedora:34 compiler-tests
 docker build -t lightda-examples-gcc:latest --build-arg compiler_image=gcc:latest compiler-tests
 docker build -t lightda-examples-oneapi:2021.2-devel-centos8 --build-arg compiler_image=intel/oneapi-hpckit:2021.2-devel-centos8 --build-arg CC=icc --build-arg CXX=icpc --build-arg FC=ifort --build-arg FFLAGS="$IFORT_FFLAGS" compiler-tests
 docker build -t lightda-examples-oneapi:2021.2-devel-ubuntu18.04 --build-arg compiler_image=intel/oneapi-hpckit:2021.2-devel-ubuntu18.04 --build-arg CC=icc --build-arg CXX=icpc --build-arg FC=ifort --build-arg FFLAGS="$IFORT_FFLAGS" compiler-tests
