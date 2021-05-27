@@ -61,7 +61,7 @@ FROM build_base AS build_with_ford
 
 USER root
 RUN if command -v apt-get; then apt-get install -y liblapack-dev python3-pip; fi
-RUN if command -v yum; then yum -y install lapack-devel python3; fi
+RUN if command -v yum; then yum -y install lapack-devel python3 python3-pip; fi
 RUN pip3 install fprettify ford
 
 FROM build_with_ford as system_mpi-build
