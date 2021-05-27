@@ -84,7 +84,7 @@ ENV PATH=/usr/local/openmpi/bin:$PATH
 
 RUN git clone --branch main /repositories/system_mpi.git
 RUN mkdir build
-RUN cd /build/build
+WORKDIR /build/build
 RUN cmake \
   -DMPI_Fortran_COMPILER=/usr/local/openmpi/bin/mpif90 \
   -DMPI_C_COMPILER=/usr/local/openmpi/bin/mpicc \
@@ -148,7 +148,7 @@ ENV PATH=/usr/local/openmpi/bin:$PATH
 
 RUN git clone --branch main /repositories/lightda.git
 RUN mkdir build
-RUN cd /build/build
+WORKDIR /build/build
 
 RUN cmake \
   -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
@@ -176,7 +176,7 @@ ENV PATH=/usr/local/openmpi/bin:$PATH
 
 RUN git clone --branch main /repositories/lightda-lenkf-rsm.git
 RUN mkdir build
-RUN cd /build/build
+WORKDIR /build/build
 
 RUN cmake \
   -Dfortran_exceptions_DIR:PATH=/build/install/lib/cmake/fortran_exceptions \
