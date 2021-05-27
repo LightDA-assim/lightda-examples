@@ -4,6 +4,8 @@ FROM $compiler_image AS build_base
 RUN if command -v apt-get; then apt-get update; fi
 RUN if command -v apt-get; then apt-get -y install cmake git; fi
 RUN if command -v yum; then yum -y install cmake git; fi
+RUN if [ $(sed -n 's/^ID=//p' /etc/os-release) == "fedora" ]; then yum -y install lbzip2; fi
+RUN if command -v yum; then yum -y install gcc-gfortran gcc-c++; fi
 
 ARG FC=gfortran
 ARG FFLAGS="-g -fbacktrace -std=f2008 -fcheck=all"
