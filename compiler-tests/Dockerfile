@@ -45,6 +45,7 @@ FROM build_base as openmpi-build
 USER root
 ADD https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.bz2 .
 RUN chown build:build openmpi-4.1.1.tar.bz2
+RUN if command -v yum; then yum -y install findutils; fi
 
 USER build
 
