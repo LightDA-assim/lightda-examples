@@ -45,13 +45,14 @@ FROM build_base as openmpi-build
 USER root
 ADD https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.bz2 .
 RUN chown build:build openmpi-4.1.1.tar.bz2
-RUN if command -v yum; then yum -y install findutils; fi
+RUN if command -v yum; then yum -y install valgrind-devel findutils; fi
+RUN if command -v apt-get; then apt-get install -y valgrind; fi
 
 USER build
 
 RUN tar xf openmpi-4.1.1.tar.bz2
 WORKDIR /build/openmpi-4.1.1
-RUN ./configure --prefix=/usr/local/openmpi
+RUN ./configure --prefix=/usr/local/openmpi --with-valgrind
 RUN make all
 USER root
 RUN make install
