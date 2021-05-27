@@ -43,13 +43,13 @@ RUN chown -R root:root /usr/local/hdf5
 FROM build_base as openmpi-build
 
 USER root
-ADD https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.0.tar.bz2 .
-RUN chown build:build openmpi-4.1.0.tar.bz2
+ADD https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.1.tar.bz2 .
+RUN chown build:build openmpi-4.1.1.tar.bz2
 
 USER build
 
-RUN tar xf openmpi-4.1.0.tar.bz2
-WORKDIR /build/openmpi-4.1.0
+RUN tar xf openmpi-4.1.1.tar.bz2
+WORKDIR /build/openmpi-4.1.1
 RUN ./configure --prefix=/usr/local/openmpi
 RUN make all
 USER root
