@@ -53,7 +53,7 @@ USER build
 RUN tar xf openmpi-4.1.1.tar.bz2
 WORKDIR /build/openmpi-4.1.1
 RUN ./configure --prefix=/usr/local/openmpi --with-valgrind
-RUN make all
+RUN make -j8 all
 USER root
 RUN make install
 
