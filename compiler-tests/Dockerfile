@@ -64,10 +64,17 @@ RUN if command -v apt-get; then apt-get install -y liblapack-dev python3-pip; fi
 RUN if command -v yum; then yum -y install lapack-devel python3 python3-pip; fi
 RUN pip3 install fprettify ford
 
-FROM build_with_ford as system_mpi-build
+USER build
+
+FROM build_with_ford AS build_with_mpi
 
 USER root
 COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
+USER build
+
+FROM build_with_mpi as system_mpi-build
+
+USER root
 COPY --from=system_mpi-repo / /repositories
 
 USER build
@@ -127,10 +134,9 @@ RUN cmake \
 RUN make -j8
 RUN make install
 
-FROM build_with_ford as lightda-build
+FROM build_with_mpi as lightda-build
 
 USER root
-COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
 COPY --from=fortran_exceptions-build /build/install /build/install
 COPY --from=system_mpi-build /build/install /build/install
 COPY --from=lightda-repo / /repositories
@@ -155,10 +161,9 @@ RUN cmake \
 RUN make -j8
 RUN make install
 
-FROM build_with_ford as lightda_lenkf_rsm-build
+FROM build_with_mpi as lightda_lenkf_rsm-build
 
 USER root
-COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
 COPY --from=fortran_exceptions-build /build/install /build/install
 COPY --from=system_mpi-build /build/install /build/install
 COPY --from=lightda-build /build/install /build/install
@@ -185,12 +190,11 @@ RUN cmake \
 RUN make -j8
 RUN make install
 
-FROM build_with_ford as lightda-examples-build
+FROM build_with_mpi as lightda-examples-build
 
 USER root
 
 COPY --from=hdf5-build /usr/local/hdf5/ /usr/local/hdf5
-COPY --from=openmpi-build /usr/local/openmpi/ /usr/local/openmpi/
 COPY --from=lightda-examples-src / /src
 COPY --from=system_mpi-build /build/install /build/install
 COPY --from=fortran_exceptions-build /build/install /build/install
