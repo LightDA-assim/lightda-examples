@@ -2,7 +2,7 @@ include(ExternalProject)
 
 set(
   lightda-lenkf-rsm_GIT_URL
-  "git@gitlab.hpc.mil:john.haiducek.ctr/lightda-lenkf-rsm.git" CACHE STRING
+  "https://github.com/LightDA-assim/lightda-lenkf-rsm.git" CACHE STRING
   "URL of lightda-lenkf-rsm git repository")
 
 set(lightda-lenkf-rsm_INSTALL_DIR

@@ -2,7 +2,7 @@ include(ExternalProject)
 
 set(
   hdf5_exceptions_GIT_URL
-  "git@gitlab.hpc.mil:john.haiducek.ctr/hdf5_exceptions.git" CACHE STRING
+  "https://github.com/LightDA-assim/hdf5_exceptions.git" CACHE STRING
   "URL of fortran_exceptions git repository")
 
 set(hdf5_exceptions_INSTALL_DIR

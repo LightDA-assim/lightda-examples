@@ -2,11 +2,11 @@ include(ExternalProject)
 
 set(
   lightda_GIT_URL
-  "git@gitlab.hpc.mil:john.haiducek.ctr/lightda.git" CACHE STRING
+  "https://github.com/LightDA-assim/lightda-core.git" CACHE STRING
   "URL of LightDA git repository")
 
 set(lightda_INSTALL_DIR
-  "${CMAKE_CURRENT_BINARY_DIR}/lightda" CACHE PATH
+  "${CMAKE_CURRENT_BINARY_DIR}/lightda-core" CACHE PATH
   "LightDA installation directory")
 
 set(lightda_DIR

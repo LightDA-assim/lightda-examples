@@ -2,7 +2,7 @@ include(ExternalProject)
 
 set(
   system_mpi_GIT_URL
-  "git@gitlab.hpc.mil:john.haiducek.ctr/system_mpi.git" CACHE STRING
+  "https://github.com/LightDA-assim/system_mpi.git" CACHE STRING
   "URL of system_mpi git repository")
 
 set(system_mpi_INSTALL_DIR
