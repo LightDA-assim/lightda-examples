@@ -16,8 +16,6 @@ module advect1d_assimilate_interfaces
      !! I/O interface for the advect1d model
 
     private
-    real(kind=8)::cutoff, cutoff_u_a
-    logical::observations_read = .false., predictions_computed = .false.
     integer::istep
   contains
     procedure::store_member_state
@@ -42,12 +40,6 @@ contains
       n_ensemble, state_size, comm)
 
     this%istep = istep
-
-    this%cutoff = 0.1
-    this%cutoff_u_a = 0.2
-
-    this%observations_read = .false.
-    this%predictions_computed = .false.
 
     call h5open_f(ierr)
 
