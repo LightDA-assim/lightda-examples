@@ -15,6 +15,8 @@ find_package(lightda REQUIRED NO_POLICY_SCOPE)
 find_package(lightda-lenkf-rsm REQUIRED)
 find_package(hdf5_exceptions REQUIRED)
 
+separate_arguments(MPIEXEC_PREFLAGS)
+
 add_library(model_interface_tests model_interface_tests.f90)
 target_link_libraries(model_interface_tests PRIVATE lightda)
 
@@ -23,7 +25,7 @@ target_link_libraries(advect1d_model_interface_tests PRIVATE model_interface_tes
 target_link_libraries(advect1d_model_interface_tests PRIVATE lightda_util)
 target_link_libraries(advect1d_model_interface_tests PRIVATE hdf5_exceptions)
 
-add_test(test_advect1d_model_interface ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 4 ./advect1d_model_interface_tests)
+add_test(test_advect1d_model_interface ${MPIEXEC_EXECUTABLE} ${MPIEXEC_NUMPROC_FLAG} 4 ${MPIEXEC_PREFLAGS} ./advect1d_model_interface_tests)
 
 add_custom_target(all_tests ALL DEPENDS advect1d_model_interface_tests)
 
