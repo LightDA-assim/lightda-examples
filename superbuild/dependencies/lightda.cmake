@@ -34,7 +34,7 @@ set(lightda_DIR
 
 ExternalProject_Add(lightda
   GIT_REPOSITORY ${lightda_GIT_URL}
-  GIT_TAG main
+  GIT_TAG finalization_crash_fix
   CMAKE_CACHE_ARGS
      -DMPI_Fortran_COMPILER:PATH=${MPI_Fortran_COMPILER}
      -DMPI_C_COMPILER:PATH=${MPI_C_COMPILER}

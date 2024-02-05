@@ -16,7 +16,7 @@ set(fortran_exceptions_DIR
 ExternalProject_Add(
   fortran_exceptions
   GIT_REPOSITORY ${fortran_exceptions_GIT_URL}
-  GIT_TAG main
+  GIT_TAG finalization_crash_fix
   CMAKE_CACHE_ARGS
     -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
         -DCMAKE_INSTALL_PREFIX:PATH=${fortran_exceptions_INSTALL_DIR})
