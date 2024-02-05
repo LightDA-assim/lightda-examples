@@ -19,5 +19,7 @@ ExternalProject_Add(lightda-examples
     -Dlightda_DIR:PATH=${lightda_DIR}
     -Dlightda-lenkf-rsm_DIR:PATH=${lightda-lenkf-rsm_DIR}
     -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
+    -DMPIEXEC_EXECUTABLE:PATH=${MPIEXEC_EXECUTABLE}
+    -DMPIEXEC_PREFLAGS:STRING=${MPIEXEC_PREFLAGS}
     -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/lightda-examples
   DEPENDS lightda lightda-lenkf-rsm hdf5_exceptions)
