@@ -42,5 +42,7 @@ ExternalProject_Add(lightda
      -Dfortran_exceptions_DIR:PATH=${fortran_exceptions_DIR}
      -Dfhash_DIR:PATH=${fhash_DIR}
     -DPYTHON_EXECUTABLE:PATH=${PYTHON_EXECUTABLE}
+    -DMPIEXEC_EXECUTABLE:PATH=${MPIEXEC_EXECUTABLE}
+    -DMPIEXEC_PREFLAGS:STRING=${MPIEXEC_PREFLAGS}
     -DCMAKE_INSTALL_PREFIX:PATH=${lightda_INSTALL_DIR}
   DEPENDS system_mpi fortran_exceptions)
