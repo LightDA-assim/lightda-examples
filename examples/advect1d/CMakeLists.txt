@@ -47,6 +47,7 @@ if(PythonInterp_FOUND)
 
   add_custom_target(advect1d_python ALL DEPENDS ${PYTHON_BUILD_TIMESTAMP})
 
+  execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools)
   install(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --root ${CMAKE_INSTALL_PREFIX} ${CMAKE_CURRENT_BINARY_DIR})")
 
 else()

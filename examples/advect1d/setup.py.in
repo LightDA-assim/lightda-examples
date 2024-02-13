@@ -1,6 +1,7 @@
-from distutils.core import setup
+from setuptools import setup
 
 requirements=[
+    'setuptools',
     'scipy',
     'cffi',
     'matplotlib',
